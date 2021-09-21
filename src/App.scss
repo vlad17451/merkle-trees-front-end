@@ -1,0 +1,53 @@
+.page {
+  background: #000000;
+  color: #FFFFFF;
+  font-family: system-ui;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //justify-content: center;
+  padding: 40px;
+  min-height: calc(100vh - (40px * 2));
+  &__title {
+    font-size: 25px;
+    margin-bottom: 50px;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+  }
+  &__value {
+    margin-bottom: 40px;
+  }
+  &__btn {
+    width: 180px;
+  }
+  &__nav {
+    font-size: 18px;
+    color: #FFFFFF;
+    margin-bottom: 100px;
+  }
+  &__field {
+    width: 100%;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.base-btn {
+  height: 40px;
+  padding: 0 10px;
+  background: #000000;
+  color: #FFFFFF;
+  border: 3px solid #FFFFFF;
+  font-weight: 600;
+  transition: .2s;
+  &:hover {
+    background: #FFFFFF;
+    color: #000000;
+  }
+}
