@@ -1,20 +1,20 @@
 import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 // @ts-ignore
-import {addMember, connect, getWhitelist} from '../../utils/web3'
+// import {addMember, connect, getWhitelist} from '../../utils/web3'
 
 export default function Home() {
 
 	const [address, setAddress] = useState('')
 
 	const handleAddMember = async () => {
-		await connect(async () => {
-			try {
-				await addMember(address, getWhitelist())
-			} catch (e) {
-				console.log(e)
-			}
-		})
+		// await connect(async () => {
+		// 	try {
+		// 		await addMember(address, getWhitelist())
+		// 	} catch (e) {
+		// 		console.log(e)
+		// 	}
+		// })
 	}
 
 	return (

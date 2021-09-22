@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import web3Reducer from '../features/web3/counterSlice';
+import web3Reducer from '../features/web3/web3Slice';
 
 export const store = configureStore({
   reducer: {

@@ -2,15 +2,15 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 // @ts-ignore
 import {NotificationManager} from 'react-notifications';
+// import {
+// 	connect,
+// 	fetchCurrentFlagHolder,
+// } from '../../app/useWeb3'
 import {
-	connect,
-	fetchCurrentFlagHolder,
-} from '../../utils/web3'
-import {
-	selectCount, getUserAddress
-} from '../../features/web3/counterSlice'
-import {useAppSelector} from '../../app/hooks'
-import {useConnect} from '../../app/useWeb3'
+	selectCount, getUserAddress, SET_USER_ADDRESS
+} from '../../features/web3/web3Slice'
+import {useAppDispatch, useAppSelector} from '../../app/hooks'
+import {captureTheFlag, fetchCurrentFlagHolder, fetchProof, getWhitelist, useConnect} from '../../app/useWeb3'
 
 export default function Home() {
 
@@ -20,13 +20,22 @@ export default function Home() {
 
 	const [holder, setHolder] = useState('-')
 
-	// const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 
-	useConnect()
+	const connect = useConnect()
 
 
 	const handleCapture = async () => {
+		dispatch(SET_USER_ADDRESS(userAddress + '1'))
 
+		await connect(async () => {
+			try {
+				const { index, proof } = await fetchProof(getWhitelist())
+				await captureTheFlag(index, proof)
+			} catch (e) {
+				console.log(e)
+			}
+		})
 		// dispatch(increment(123))
 		// await connect(async () => {
 		// 	try {
@@ -44,9 +53,9 @@ export default function Home() {
 		})
 	}
 
-	useEffect(() => {
-		fetchHolder()
-	}, [])
+	// useEffect(() => {
+	// 	fetchHolder()
+	// }, [])
 
 
 	return (

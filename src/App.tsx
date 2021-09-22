@@ -2,9 +2,7 @@ import React, {useEffect} from 'react'
 import Router from './components/Router';
 import './App.scss';
 // @ts-ignore
-import {NotificationContainer} from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
-import {fetchWhitelist} from './utils/web3'
+import {fetchWhitelist} from "./app/useWeb3";
 
 function App() {
 
@@ -15,7 +13,6 @@ function App() {
   return (
     <div>
       <Router />
-      <NotificationContainer />
     </div>
   );
 }
