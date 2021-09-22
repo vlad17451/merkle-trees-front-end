@@ -84,7 +84,6 @@ export const connect = async(callback: () => any): Promise<any> => {
 			}
 			isConnected = true
 			ctfInst = new web3.eth.Contract(CaptureTheFlagAbi, captureTheFlagAddress)
-			// console.log(await fetchCurrentFlagHolder())
 		} catch (e) {
 			console.log(e)
 			return
@@ -92,6 +91,3 @@ export const connect = async(callback: () => any): Promise<any> => {
 	}
 	return callback()
 }
-
-export const getUserAddress = (): string => userAddress
-export const getIsConnected = (): boolean => isConnected
