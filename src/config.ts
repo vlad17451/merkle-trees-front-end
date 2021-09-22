@@ -1,6 +1,6 @@
 
 
-export const captureTheFlagAddress = '0x74dAAFe9c1d29851200578efc5EA407800f9586f'
+export const captureTheFlagAddress = '0x05a23C44bD7731Daa90f3704e63506547d7540F1'
 
 export const whiteList = [
 	'0xBC6ae91F55af580B4C0E8c32D7910d00D3dbe54d',
