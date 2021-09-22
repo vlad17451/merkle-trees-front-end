@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 // @ts-ignore
-import {NotificationManager} from 'react-notifications';
 import {addMember, connect, getWhitelist} from '../../utils/web3'
 
 export default function Home() {
