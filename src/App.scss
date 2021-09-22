@@ -25,6 +25,10 @@
   &__btn {
     width: 180px;
   }
+  &__btns {
+    display: grid;
+    grid-gap: 10px;
+  }
   &__nav {
     font-size: 18px;
     color: #FFFFFF;
@@ -46,6 +50,7 @@
   border: 3px solid #FFFFFF;
   font-weight: 600;
   transition: .2s;
+  cursor: pointer;
   &:hover {
     background: #FFFFFF;
     color: #000000;

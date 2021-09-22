@@ -1,0 +1,76 @@
+// @ts-ignore
+import {NotificationManager} from 'react-notifications';
+import Web3 from 'web3'
+import CaptureTheFlag from "../abis/CaptureTheFlag";
+import {AbiItem} from "web3-utils";
+import {captureTheFlagAddress} from "../config";
+
+const CaptureTheFlagAbi: AbiItem = CaptureTheFlag as any
+let web3: Web3
+
+let isConnected = false
+let chainId = -1
+let userAddress: string
+
+let ctfInst: any
+
+export const fetchCurrentFlagHolder = async (): Promise<string> => {
+	return ctfInst.methods.currentFlagHolder().call()
+}
+
+export const setWhiteListRootHash = async (hash: string) => {
+	const method = ctfInst.methods.setWhiteListRootHash(hash)
+	await method.estimateGas({
+		from: userAddress,
+		to: ctfInst.address
+	})
+	return method.send({
+		from: userAddress,
+		to: ctfInst.address
+	})
+}
+
+export const captureTheFlag = async (index: number, proof: string[]): Promise<void> => {
+	const method = ctfInst.methods.capture(index, proof)
+	await method.estimateGas({
+		from: userAddress,
+		to: ctfInst.address
+	})
+	return method.send({
+		from: userAddress,
+		to: ctfInst.address
+	})
+}
+
+export const connect = async(callback: () => any): Promise<any> => {
+	if (!isConnected) {
+		try {
+			// @ts-ignore
+			const { ethereum } = window
+			if (!ethereum) {
+				alert('Install metamask')
+				return
+			}
+			web3 = new Web3(ethereum)
+			userAddress = await web3.eth.getCoinbase()
+			if (userAddress === null) {
+				await ethereum.enable()
+				userAddress = await web3.eth.getCoinbase()
+			}
+			chainId = await web3.eth.net.getId()
+			if (chainId !== 4) {
+				alert('Select rinkeby in metamask')
+				return
+			}
+			isConnected = true
+			ctfInst = new web3.eth.Contract(CaptureTheFlagAbi, captureTheFlagAddress)
+			// console.log(await fetchCurrentFlagHolder())
+		} catch (e) {
+			console.log(e)
+			return
+		}
+	}
+	return callback()
+}
+
+export const getUserAddress = (): string => userAddress
