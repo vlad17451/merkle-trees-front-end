@@ -7,14 +7,20 @@ import {NotificationManager} from 'react-notifications';
 // 	fetchCurrentFlagHolder,
 // } from '../../app/useWeb3'
 import {
-	selectCount, getUserAddress, SET_USER_ADDRESS
+	getUserAddress, SET_USER_ADDRESS
 } from '../../features/web3/web3Slice'
 import {useAppDispatch, useAppSelector} from '../../app/hooks'
-import {captureTheFlag, fetchCurrentFlagHolder, fetchProof, getWhitelist, useConnect} from '../../app/useWeb3'
+import {
+	_getUserAddress,
+	captureTheFlag,
+	fetchCurrentFlagHolder,
+	fetchProof,
+	getWhitelist,
+	useConnect
+} from '../../app/useWeb3'
 
 export default function Home() {
 
-	const count = useAppSelector(selectCount);
 	const userAddress = useAppSelector(getUserAddress);
 
 
@@ -36,6 +42,8 @@ export default function Home() {
 				console.log(e)
 			}
 		})
+		console.log(123123, _getUserAddress())
+
 		// dispatch(increment(123))
 		// await connect(async () => {
 		// 	try {
@@ -61,7 +69,7 @@ export default function Home() {
 	return (
 		<div className="page">
 			<Link to="/admin" className="page__nav">
-				I'm admin {count}
+				I'm admin
 			</Link>
 			<div>
 				Current connected user: {userAddress}

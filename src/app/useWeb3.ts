@@ -1,5 +1,5 @@
 
-import {getUserAddress, SET_USER_ADDRESS} from '../features/web3/web3Slice'
+import {getIsConnected, getUserAddress, SET_IS_CONNECTED, SET_USER_ADDRESS} from '../features/web3/web3Slice'
 import {useAppDispatch, useAppSelector} from './hooks'
 import {useEffect} from "react";
 
@@ -98,9 +98,13 @@ export const captureTheFlag = async (index: number, proof: string[]): Promise<vo
 // 	return callback()
 // }
 
+export const _getUserAddress = () => {
+	return useAppSelector(getUserAddress)
+}
 
 export const useConnect = (): (callback: () => any) => Promise<any> => {
 	const dispatch = useAppDispatch();
+	const isConnected = useAppSelector(getIsConnected)
 	return async(callback = () => {}): Promise<any> => {
 		if (!isConnected) {
 			try {
@@ -121,9 +125,11 @@ export const useConnect = (): (callback: () => any) => Promise<any> => {
 					alert('Select rinkeby in metamask')
 					return
 				}
-				isConnected = true
+				// isConnected = true
 				dispatch(SET_USER_ADDRESS(userAddress))
+				dispatch(SET_IS_CONNECTED(true))
 				ctfInst = new web3.eth.Contract(CaptureTheFlagAbi, captureTheFlagAddress)
+				// console.log(123123, _getUserAddress())
 			} catch (e) {
 				console.log(e)
 				return
